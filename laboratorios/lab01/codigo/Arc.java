@@ -1,24 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package lab1;
+package javaapplication1;
 
 /**
- *
+ * This class is the arc or edge object. 
  * @author Yhoan Alejandro Guzmán García
  * @author Juan Sebastián Pérez 
  */
 public class Arc {
     private String nodeIDFrom;
     private String nodeIDTo;
-    private int distance;
+    private double distance;
     private String name;
-    public Arc(String nodeIDFrom, String nodeIDTo, int weight, String name) {
+    
+    /**
+     * Class constructor
+     * @param nodeIDFrom name of the first node
+     * @param nodeIDTo name of the second node
+     * @param distance distance between nodes
+     * @param name street name
+     */
+    public Arc(String nodeIDFrom, String nodeIDTo, double distance, String name) {
         this.nodeIDFrom = nodeIDFrom;
         this.nodeIDTo = nodeIDTo;
-        this.distance = weight;
+        this.distance = distance;
         this.name = name;
     }
 
@@ -38,7 +41,7 @@ public class Arc {
         this.nodeIDTo = nodeIDTo;
     }
 
-    public int getDistance() {
+    public double getDistance() {
         return distance;
     }
 
