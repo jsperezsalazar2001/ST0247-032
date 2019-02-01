@@ -11,14 +11,15 @@ import javafx.util.Pair;
 /**
  *
  * @author Yhoan Alejandro Guzmán García
- * @author Juan Sebastián Pérez 
+ * @author Juan Sebastián Pérez
  */
 public class Node {
-   private String ID;
-   private double longitude;
-   private double latitude;
-   private String name;
-   private LinkedList<Pair<String,Arc>> neighbors = new LinkedList<Pair<String,Arc>>();
+
+    private String ID;
+    private double longitude;
+    private double latitude;
+    private String name;
+    private LinkedList<Pair<String, Arc>> neighbors = new LinkedList<Pair<String, Arc>>();
 
     public Node(String ID, double longitude, double latitude, String name) {
         this.ID = ID;
@@ -58,10 +59,13 @@ public class Node {
     public void setName(String name) {
         this.name = name;
     }
-   
+
     public void addNeighbor(String neighbor, Arc arc) {
-        Pair pair = new Pair(neighbor,arc);
+        Pair pair = new Pair(neighbor, arc);
         this.neighbors.add(pair);
     }
-         
+
+    public LinkedList<Pair<String, Arc>> getNeighbors() {
+        return neighbors;
+    }
 }
