@@ -22,7 +22,7 @@ public class Graph {
     private HashMap<String, Node> graph = new HashMap<String, Node>();
 
     /**
-     * This method reads the file and generate the graph
+     * This method reads the file and generateS the graph
      * @param fileName name of the file with vertices and edges 
      */
     public void readGraph(String fileName) {
@@ -69,7 +69,7 @@ public class Graph {
     }
 
     /**
-     * This method print the vertices and their neighbors. 
+     * This method prints the vertices and their neighbors. 
      * 
      */
     public void printGraph() {
@@ -89,7 +89,7 @@ public class Graph {
     }
 
     /**
-     * This is the main method, in this method the proves are executed. 
+     * This is the main method, in this method the tests are executed. 
      * @param args 
      */
     public static void main(String[] args) {
