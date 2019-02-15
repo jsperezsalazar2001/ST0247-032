@@ -9,7 +9,7 @@ import java.util.LinkedList;
  * @author Juan Sebastián Pérez Salazar
  * @version 1
  */
-public class DigraphAL extends Graph {
+public class DigraphAL extends Digraph {
 
     ArrayList<LinkedList<Pareja>> listaAdyacencia = new ArrayList();
 

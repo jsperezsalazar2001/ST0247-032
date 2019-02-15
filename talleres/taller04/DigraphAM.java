@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author Juan Sebastián Pérez Salazar
  * @version 1
  */
-public class DigraphAM extends Graph {
+public class DigraphAM extends Digraph {
 
     int[][] matriz;
 
