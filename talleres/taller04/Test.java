@@ -39,7 +39,7 @@ public class Test {
 		g1.addArc(4, 1, 3);
 		g1.addArc(4, 2, 2);
 		g1.addArc(4, 3, 4);
-		if (Taller4_ED2.recorrido(g1) != 10)
+		if (Taller4_ED2.hamiltoniano(g1, 0) != 10)
 			return false;
 
 		DigraphAL g2 = new DigraphAL(4);
@@ -59,7 +59,7 @@ public class Test {
 		g2.addArc(1, 1, 0);
 		g2.addArc(2, 2, 0);
 		g2.addArc(3, 3, 0);
-		if (Taller4_ED2.recorrido(g2) != 80)
+//		if (Taller4_ED2.recorrido(g2) != 80)
 			return false;
 		
 		DigraphAL g3 = new DigraphAL(4);
