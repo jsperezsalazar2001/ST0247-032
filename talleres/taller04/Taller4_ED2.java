@@ -74,8 +74,40 @@ public class Taller4_ED2 {
             int value = Integer.MAX_VALUE;
             for (Integer hijo : children) {
                 int costoPadreHijo = g.getWeight(v, hijo);
-                if ((costoPadreHijo < costoMin) && !(v==hijo) /*&& !valued[hijo]*/) {
+                if ((costoPadreHijo < costoMin) && !(v == hijo) /*&& !valued[hijo]*/) {
                     value = Math.min(costoMinimo(g, hijo, w, costoMin, acumulado + g.getWeight(v, hijo), valued), value);
+                }
+            }
+            return value;
+        }
+    }
+
+    public static int hamiltoniano(Digraph g, int inicio) {
+        boolean[] valued = new boolean[g.size()];
+        int cost = hamiltoniano(g, inicio, inicio, Integer.MAX_VALUE, 0, valued);
+        return cost == Integer.MAX_VALUE ? -1 : cost;
+    }
+
+    public static int hamiltoniano(Digraph g, int v, int w, int costoMin, int acumulado, boolean[] valued) {
+        valued[v] = true;
+        boolean allVisited = true;
+        for(int i = 0; i < valued.length; i++) {
+            if (!valued[i]) {
+                allVisited = false;
+            }
+        }
+        if (v == w && allVisited) {
+            if (costoMin > acumulado) {
+                costoMin = acumulado;
+            }
+            return costoMin;
+        } else{
+            ArrayList<Integer> children = g.getSuccessors(v);
+            int value = Integer.MAX_VALUE;
+            for (Integer hijo : children) {
+                int costoPadreHijo = g.getWeight(v, hijo);
+                if (((costoPadreHijo < costoMin) && !valued[hijo]) || ((hijo == v)&& allVisited)) {
+                    value = Math.min(hamiltoniano(g, hijo, v, costoMin, acumulado + g.getWeight(v, hijo), valued), value);
                 }
             }
             return value;
@@ -112,19 +144,24 @@ public class Taller4_ED2 {
         g1.addArc(0, 1, 2);
         g1.addArc(0, 2, 2);
         g1.addArc(0, 3, 1);
+        g1.addArc(0, 4, 4);
         g1.addArc(1, 0, 2);
         g1.addArc(1, 2, 3);
         g1.addArc(1, 3, 2);
+        g1.addArc(1, 4, 3);
         g1.addArc(2, 0, 2);
         g1.addArc(2, 1, 3);
         g1.addArc(2, 3, 2);
+        g1.addArc(2, 4, 2);
         g1.addArc(3, 0, 1);
         g1.addArc(3, 1, 2);
         g1.addArc(3, 2, 2);
-        g1.addArc(3, 4, 2);
+        g1.addArc(3, 4, 4);
         g1.addArc(4, 0, 4);
         g1.addArc(4, 1, 3);
         g1.addArc(4, 2, 2);
+        g1.addArc(4, 3, 4);
+        System.out.println(hamiltoniano(g1, 0));
         //System.out.println(thereIsAPathDFS(g1, 3, 4));
         DigraphAL g2 = new DigraphAL(5);
         g2.addArc(0, 2, 100);
@@ -134,7 +171,7 @@ public class Taller4_ED2 {
         g2.addArc(0, 3, 20);
         g2.addArc(3, 2, 20);
         g2.addArc(3, 4, 50);
-        System.out.println(costoMinimo(g2, 0, 4));
+        //System.out.println(costoMinimo(g2, 0, 4));
     }
 
 }
