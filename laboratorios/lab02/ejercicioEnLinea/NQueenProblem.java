@@ -43,7 +43,7 @@ public class NQueensProblem {
     public void subSetPermAux(int[] prefix, int[] sufix) {
         if (sufix.length == 0) {
                 board[globalIndex] = prefix;
-                printArray(prefix);
+                //printArray(prefix);
                 globalIndex++;
         } else {
             for (int i = 0; i < sufix.length; i++) {
@@ -70,7 +70,7 @@ public class NQueensProblem {
             String line = sc.nextLine();
             for (int j = 0; j < line.length(); j++) {
                 if (line.charAt(j) == '*') {
-                    System.out.println("entra: "+i+" "+j);
+                    //System.out.println("entra: "+i+" "+j);
                     map.put(j, i);
                 }
             }
