@@ -12,7 +12,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 // This class represents an undirected graph using adjacency list 
 
-class Bicoloreable {
+class Mcoloreable {
 
     private int V;   // No. of vertices 
     private LinkedList<Integer> adj[]; //Adjacency List 
@@ -82,20 +82,20 @@ class Bicoloreable {
     }
 
     public static void main(String args[]) {
-        Bicoloreable g1 = new Bicoloreable(3);
+        Mcoloreable g1 = new Mcoloreable(3);
         g1.addEdge(0, 1);
         g1.addEdge(1, 2);
         g1.addEdge(2, 0);
         System.out.println("Graph 1");
         g1.greedyColoring(4);
         System.out.println();
-        Bicoloreable g2 = new Bicoloreable(3);
+        Mcoloreable g2 = new Mcoloreable(3);
         g2.addEdge(0, 1);
         g2.addEdge(1, 2);
         System.out.println("Graph 2");
         g2.greedyColoring(3);
         System.out.println();
-        Bicoloreable g3 = new Bicoloreable(9);
+        Mcoloreable g3 = new Mcoloreable(9);
         g3.addEdge(0, 1);
         g3.addEdge(0, 2);
         g3.addEdge(0, 3);
