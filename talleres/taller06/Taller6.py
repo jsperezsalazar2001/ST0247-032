@@ -19,13 +19,14 @@ class Taller6:
         print(cantidades)
 
     def costoMinimo(g):
+        minPath = math.inf
         for x in range(g.size):
             camino = 0
             v = 0
             cont = 0
             index = 0
             min = 0
-            valued = [False] * g.size9
+            valued = [False] * g.size
             for i in range(g.size):
                 v = index
                 hijos = g.getSuccessors(v)
@@ -33,8 +34,8 @@ class Taller6:
                 valued[v] = True
                 cont += 1
                 j = 0
-                while(j < len(hijos)):
 
+                while(j < len(hijos)):
                     costo = g.getWeight(v, hijos[j])
                     #print(str(valued[hijos[j]])+str(j))
                     #print(hijos)
@@ -43,15 +44,17 @@ class Taller6:
                         min = costo
                         index = hijos[j]
                         #print("index: "+str(index)+" v: "+str(v)+" hijos j : "+str(hijos[j])+" costo:"+str(costo))
-
                     j += 1
 
                 if min != math.inf:
                     camino += min
-            print(camino)
+                    
+            if minPath > camino:
+                minPath = camino
+        print(minPath)
 
     cambioGreedy(900, [1000, 500, 200, 50])
-    grafo = GraphAm(5)
+    grafo = GraphAl(5)
     grafo.addArc(0, 1, 2)
     grafo.addArc(0, 2, 2)
     grafo.addArc(0, 3, 1)
@@ -73,3 +76,4 @@ class Taller6:
     grafo.addArc(4, 2, 2)
     grafo.addArc(4, 3, 4)
     costoMinimo(grafo)
+
