@@ -70,10 +70,13 @@ class Taller7:
             table.append(current)
 
         tree = []
+        pathCost= 0
         for k in range(len(table)):
             tree.append([table[k], father[table[k]]])
+            if k != 0:
+                pathCost += g.getWeight(table[k], father[table[k]])
 
-        return tree
+        return str(tree) + " path cost: " + str(pathCost)
 
 
 graph = GraphAl(5)
