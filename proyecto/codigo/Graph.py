@@ -1,5 +1,7 @@
+# -*- coding: utf-8 -*-
 from Arc import *
 from Node import *
+import math
 
 """
  * This class contains the methods that read the file and save the graph for later access.
@@ -18,11 +20,11 @@ class Graph:
     """
     def readGraph(self, filename, numberOfCars):
         try:
-            file = open(filename, "r")
+            file = open(filename, "r", encoding='utf-8')
             for i in range(5):
                 line = file.readline()
-            while line is not None:
-                if len(line) > 0:
+            while line != "":
+                if len(line) > 0 and line != "\n":
                     if "Costo" in line:
                         break
                     description = ""
@@ -30,28 +32,37 @@ class Graph:
                     if len(lineArray) >= 4:
                         description = lineArray[3]
                     node = Node(lineArray[0], float(lineArray[1]), float(lineArray[2]), description)
-                    self.__graph.add(node.getID(), node)
+                    self.__graph[node.getID()] = node
+                line = file.readline()
             for i in range(2):
                 line = file.readline()
-                matrix = [[0 for x in range(numberOfCars)] for y in range(numberOfCars)]
-            while line is not None:
+                matrix = [[0 for x in range(numberOfCars+1)] for y in range(numberOfCars+1)]
+            while line != "":
                 if len(line) > 0:
                     lineArray = line.split(" ")
                     node1 = self.__graph.get(lineArray[0])
                     node2 = self.__graph.get(lineArray[1])
-                    arc = Arc(lineArray[2], self.getAngle(node1, node2), self.getDistanceBNodes(node1, node2,111111))
+                    arc = Arc(lineArray[2], self.getAngle(node1, node2), self.getDistanceBNodes(node1, node2))
                     matrix[int(lineArray[0])-1][int(lineArray[1])-1] = arc
+                line = file.readline()
+            file.close()
         except:
             print("error gonorrea")
 
     def getAngle(self, node1, node2):
-        return (node2.getLatitude() - node1.getLatitude())/(node2.getLongitude() - node1.getLongitude())
-
-    """def getDistance(self, node1, node2, average):
-        return -3 * pow(10, -9) * pow(average, 6) - 2 * pow(10, -7) * pow(average, 5) + 0.0004 * pow(average, 4) - 0.0005 * pow(average, 3) - 16.948 * pow(average, 2) - 0.0463 * average + 111325;"""
+        try:
+            difLatitude = node2.getLatitude() - node1.getLatitude()
+            difLongitude = node2.getLongitude() - node1.getLongitude()
+            return difLatitude/difLongitude
+        except Exception:
+            return 0
 
     def getDistanceBNodes(self, node1, node2):
-        distanceBLongitudes = (abs(abs(node1.getLongitude) - abs(node2.getLongitude)) * self.__distanceLongi)
-        distanceBLatitudes = (abs(abs(node1.getLatitude) - abs(node2.getLatitude)) * self.__distanceLat)
-        return sqrt(pow(distanceBLatitudes,2)+pow(distanceBLongitudes,2))
+        distanceBLongitudes = (math.fabs(math.fabs(node1.getLongitude()) - math.fabs(node2.getLongitude())) * self.__distanceLongi)
+        distanceBLatitudes = (math.fabs(math.fabs(node1.getLatitude()) - math.fabs(node2.getLatitude())) * self.__distanceLat)
+        return math.sqrt(pow(distanceBLatitudes, 2)+pow(distanceBLongitudes, 2))
 
+
+prueba = Graph()
+prueba.readGraph("dataset-ejemplo-U=4-p=1.2.txt", 4)
+print("finish")
