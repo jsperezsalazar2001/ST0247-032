@@ -19,8 +19,8 @@ class Node:
         self.__longitude = lon
         self.__latitude = lat
         self.__name = nam
-        self.__neighbors = [()]
-
+        self.__passengers = [id]
+        self.__pickedUp = False
     def getID(self):
         return self.__ID
 
@@ -51,14 +51,22 @@ class Node:
      * @param arc edge between nodes
     """
 
-    def addNeighbor(self, neighbor, arc):
-        pair = (neighbor, arc)
-        self.__neighbors.append(pair)
+    def addPassenger(self, passenger):
+        self.__passengers.append(passenger)
 
     """
      * This method get the adyacent nodes of one vertex. 
      * @return a linkedList
     """
 
-    def getNeighbors(self):
-        return self.__neighbors
+    def getPassengers(self):
+        return self.__passengers
+
+    def getNumberPassenger(self):
+        return len(self.__passengers)
+
+    def getPickedUp(self):
+        return self.__pickedUp
+
+    def setPickedUp(self, b):
+        self.__pickedUp = b

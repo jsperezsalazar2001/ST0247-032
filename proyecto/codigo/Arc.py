@@ -17,7 +17,9 @@ class Arc:
      * @param distance distance between nodes
      * @param name street name
     """
-    def __init__(self, time, angle, distance):
+    def __init__(self, time, angle, distance, nodeIDFrom, nodeIDTo):
+        self.__nodeIDFrom = nodeIDFrom
+        self.__nodeIDTo = nodeIDTo
         self.__time = time
         self.__angle = angle
         self.__distance = distance
@@ -40,4 +42,9 @@ class Arc:
     def setDistance(self, distance):
         self.__distance = distance
 
+    def getNodeIDFrom(self):
+        return self.__nodeIDFrom
+
+    def getNodeIDTo(self):
+        return self.__nodeIDTo
 
