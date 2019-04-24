@@ -15,14 +15,17 @@ class Graph:
     __matrix = [[]]
     __distanceLongi = 111111
     __distanceLat = 111000
+    __p = 1
+
     """
     * This method reads the file and generateS the graph
     * @param fileName name of the file with vertices and edges
     """
     def readGraph(self, filename, numberOfCars):
-        try:
+        #try:
             file = open(filename, "r", encoding='utf-8')
-            for i in range(5):
+            self.__p = float(file.readline().split(" ")[1])
+            for i in range(4):
                 line = file.readline()
             while line != "":
                 if len(line) > 0 and line != "\n":
@@ -37,19 +40,19 @@ class Graph:
                 line = file.readline()
             for i in range(2):
                 line = file.readline()
-                self.__matrix = [[Arc(0, 0, 0, 0, 0) for x in range(numberOfCars+1)] for y in range(numberOfCars+1)]
+                self.__matrix = [[Arc(0, 0, 0, None, None) for x in range(numberOfCars+1)] for y in range(numberOfCars+1)]
             while line != "":
                 if len(line) > 0:
                     lineArray = line.split(" ")
-                    node1 = self.__graph.get(lineArray[0])
-                    node2 = self.__graph.get(lineArray[1])
+                    node1 = self.__graph.get(int(lineArray[0]))
+                    node2 = self.__graph.get(int(lineArray[1]))
                     arc = Arc(lineArray[2], self.getAngle(node1, node2), self.getDistanceBNodes(node1, node2),
-                              node2.getID(), node1.getID())
+                              node1, node2)
                     self.__matrix[int(lineArray[0])-1][int(lineArray[1])-1] = arc
                 line = file.readline()
             file.close()
-        except:
-            print("error gonorrea")
+        #except:
+            #print("error gonorrea")
 
     def getAngle(self, node1, node2):
         try:
@@ -71,7 +74,10 @@ class Graph:
     def getMatrix(self):
         return self.__matrix
 
+    def getP(self):
+        return self.__p
+
 
 prueba = Graph()
-prueba.readGraph("dataset-ejemplo-U=4-p=1.2.txt", 4)
+prueba.readGraph("./dataSets/dataset-ejemplo-U=4-p=1.2.txt", 4)
 print("finish")

@@ -19,8 +19,10 @@ class Node:
         self.__longitude = lon
         self.__latitude = lat
         self.__name = nam
-        self.__passengers = [id]
+        self.__passengers = []
         self.__pickedUp = False
+        #self.__pickedUpBy = None
+
     def getID(self):
         return self.__ID
 
@@ -70,3 +72,9 @@ class Node:
 
     def setPickedUp(self, b):
         self.__pickedUp = b
+
+    def getPickedUpBy(self):
+        return self.__pickedUpBy
+
+    def setPickedUpBy(self, b):
+        self.__pickedUpBy = b
