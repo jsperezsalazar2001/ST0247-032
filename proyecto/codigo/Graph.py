@@ -16,7 +16,7 @@ class Graph:
     __distanceLongi = 111111
     __distanceLat = 111000
     __p = 1
-
+    __nodesArray = []
     """
     * This method reads the file and generateS the graph
     * @param fileName name of the file with vertices and edges
@@ -37,6 +37,7 @@ class Graph:
                         description = lineArray[3]
                     node = Node(int(lineArray[0]), float(lineArray[1]), float(lineArray[2]), description)
                     self.__graph[node.getID()] = node
+                    self.__nodesArray.append(node)
                 line = file.readline()
             for i in range(2):
                 line = file.readline()
@@ -51,6 +52,9 @@ class Graph:
                     self.__matrix[int(lineArray[0])-1][int(lineArray[1])-1] = arc
                 line = file.readline()
             file.close()
+            for node in self.__nodesArray:
+                arc = Arc(0, 0, 0, node, node)
+                self.__matrix[int(node.getID()) - 1][int(node.getID()) - 1] = arc
         #except:
             #print("error gonorrea")
 

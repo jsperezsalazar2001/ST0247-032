@@ -10,13 +10,14 @@ class OrderFinder:
         self.__distancesArray = []
 
     def getTargetDistance(self, graph):
-        for i in range(len(graph)):
-            self.__distancesArray.append(graph[i][0])
+        for i in range(len(graph) - 1):
+            self.__distancesArray.append(graph[i+1][0])
         self.__distancesArray.sort(key=lambda x: x.getDistance(), reverse=True)
         return self.__distancesArray
 
     def orderFinder(self, distancesArray, graph, p):
-        if len(distancesArray) <= 20:
+        graph[0][0].getNodeFrom().setPickedUp(True)
+        if len(distancesArray) <= 206:
             #for j in distancesArray:
                 #if j.getNodeFrom() is not None:
                     #print(j.getNodeFrom().getID())
@@ -27,24 +28,36 @@ class OrderFinder:
                     print("ya")
                     iniNode.addPassenger(iniNode)
                     iniNode.setPickedUp(True)
-                    cont = 1
+                    cont = 0
                     successorsNumber = 0
                     maxTimesToTarget = [int(graph[iniNode.getID()-1][0].getTime())*p]
+                    print("Max time to target:")
+                    print(maxTimesToTarget)
                     lastPickedUp = iniNode
                     successors = self.getDistanceFromToSorted(graph, iniNode)
                     while cont <= 5 and successorsNumber < len(successors):
+                        print("cont: "+str(cont)+" sn: "+str(successorsNumber))
                         successors = self.getDistanceFromToSorted(graph, lastPickedUp)
                         nodeTo = successors[successorsNumber].getNodeTo()
+                        print("Successors: ")
+                        self.imprimirArrayArcos(successors)
+                        print("Node from: " + str(successors[successorsNumber].getNodeFrom().getID())+ " Node to: "+str(nodeTo.getID())+" / Nodeto is pickedUP?: " + str(nodeTo.getPickedUp()))
                         canPickUp = True
-                        if nodeTo is not None and nodeTo.getPickedUp() is False:
+                        if nodeTo is not None and nodeTo.getPickedUp() is not True:
+                            print("Entra if 1")
                             for maxTime in maxTimesToTarget:
-                                if (maxTime - graph[lastPickedUp.getID()-1][nodeTo.getID()-1] - graph[nodeTo.getID()-1][0]) <= 0:
+                                if (maxTime - graph[lastPickedUp.getID()-1][nodeTo.getID()-1].getTime() - graph[nodeTo.getID()-1][0].getTime()) <= 0:
+                                    print("entra if 2")
+                                    print("LastPickedUp"+str(lastPickedUp.getID()))
                                     canPickUp = False
+                                    break
+
                             if canPickUp:
                                 iniNode.addPassenger(nodeTo)
                                 for max in range(len(maxTimesToTarget)):
                                     maxTimesToTarget[max] -= graph[lastPickedUp.getID()-1][nodeTo.getID()-1].getTime()
-                                maxTimesToTarget.append(graph[nodeTo.getID()-1][0].getTime())
+                                maxTimesToTarget.append(int(graph[nodeTo.getID() - 1][0].getTime()) * p)
+                                print(maxTimesToTarget)
                                 lastPickedUp = nodeTo
                                 nodeTo.setPickedUp(True)
                                 # nodeTo.setPickedUpBy(self, lastPickedUp)
@@ -52,7 +65,8 @@ class OrderFinder:
                                 successorsNumber = 0
                             else:
                                 successorsNumber += 1
-
+                        else:
+                            successorsNumber += 1
 
         #initialPickers = len(distancesArray)/5
         #answer = [len(distancesArray)]
@@ -61,15 +75,24 @@ class OrderFinder:
     def showAnswer(self):
         for arc in self.__distancesArray:
             node = arc.getNodeFrom()
-            if node is not None: #and len(node.getPassengers()) != 0:
-                print ("hpta")
-                print(node.getPassengers())
-
+            if node is not None and len(node.getPassengers()) != 0:
+                nodes = (node.getPassengers())
+                print("[", end = "")
+                for n in nodes:
+                    print(n.getID(), end = ",")
+                print("]")
     def getDistanceFromToSorted(self, graph, node1):
         sortedArray = []
         for i in range(len(graph)):
-            sortedArray.append(graph[node1.getID()][i])
+            if i != int(node1.getID() - 1):
+                sortedArray.append(graph[int(node1.getID()) - 1][i])
         sortedArray.sort(key=lambda x: int(x.getTime()))
+        #print(sortedArray)
         return sortedArray
 
-
+    def imprimirArrayArcos(self, arr):
+        print("[", end="")
+        for i in range(len(arr) - 1):
+            print(arr[i].getNodeTo().getID(), end = ",")
+        print(arr[len(arr) - 1].getNodeTo().getID(), end = "")
+        print("]")

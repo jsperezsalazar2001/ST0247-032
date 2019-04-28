@@ -25,7 +25,7 @@ class Arc:
         self.__distance = distance
 
     def getTime(self):
-        return self.__time
+        return int(self.__time)
 
     def setTime(self, time):
         self.__time = time
