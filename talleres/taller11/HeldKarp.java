@@ -1,8 +1,7 @@
 package laboratorio4;
 /**
- * @autor Daniel Felipe Gomez Martinez
- * @autor Daniel Garcia Garcia
- * @autor Cesar Andres Garcia
+ * @autor Juan Sebastián Pérez Salazar
+ * @autor Yhoan Alejandro Guzmán García
  * 
  **/
 
