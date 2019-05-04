@@ -16,6 +16,7 @@ class Graph:
     __distanceLongi = 111111
     __distanceLat = 111000
     __p = 1
+    __mode = 0
     __nodesArray = []
     """
     * This method reads the file and generateS the graph
@@ -24,10 +25,19 @@ class Graph:
     def readGraph(self, filename, numberOfCars):
         #try:
             file = open(filename, "r", encoding='utf-8')
-            self.__p = float(file.readline().split(" ")[1])
+            strP = file.readline().split(" ")[1]
+            try:
+                self.__p = int(strP)
+                self.__mode = 1
+            except ValueError:
+                self.__p = float(strP)
+                self.__mode = 0
             for i in range(4):
                 line = file.readline()
-            while line != "":
+            cont = 0
+            while line != "" and line != "\n":
+                cont += 1
+                #print(line)
                 if len(line) > 0 and line != "\n":
                     if "Costo" in line:
                         break
@@ -39,10 +49,11 @@ class Graph:
                     self.__graph[node.getID()] = node
                     self.__nodesArray.append(node)
                 line = file.readline()
-            for i in range(2):
+            print("Number of read nodes: " + str(cont))
+            for i in range(3):
                 line = file.readline()
-                self.__matrix = [[Arc(0, 0, 0, None, None) for x in range(numberOfCars+1)] for y in range(numberOfCars+1)]
-            while line != "":
+            self.__matrix = [[Arc(0, 0, 0, None, None) for x in range(numberOfCars)] for y in range(numberOfCars)]
+            while line != "" and line != "\n":
                 if len(line) > 0:
                     lineArray = line.split(" ")
                     node1 = self.__graph.get(int(lineArray[0]))
@@ -81,7 +92,21 @@ class Graph:
     def getP(self):
         return self.__p
 
+    def getMode(self):
+        return self.__mode
+
+    def printMatrix(self):
+        matrix = self.__matrix
+        for i in range(len(self.__matrix)):
+            print("[   ", end="")
+            for j in range(len(self.__matrix)):
+                print(str(matrix[i][j].getNodeFrom()) + "  ,  ", end = "")
+            print(" ]")
+
+
 
 prueba = Graph()
-prueba.readGraph("./dataSets/dataset-ejemplo-U=4-p=1.2.txt", 4)
-print("finish")
+prueba.readGraph("./dataSets/dataset-ejemplo-U=4-p=1.2.txt", 5)
+#prueba.readGraph("./dataSets/dataset-ejemplo-U=4-p=1.2.txt", 5)
+#prueba.printMatrix()
+
