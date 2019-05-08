@@ -76,20 +76,28 @@ class OrderFinder:
         #answer = [len(distancesArray)]
         #for i in range(initialPickers):
 
-    def showAnswer(self):
+    def showAnswer(self, numberOfCars, p):
+        filename = "./answers/resultCarpoolingRouting-U_"+str(numberOfCars)+"-p_"+str(p)+".txt"
+        result = open(filename, "w+")
         cont = 0
         for arc in self.__distancesArray:
             node = arc.getNodeFrom()
             if node is not None and len(node.getPassengers()) != 0:
                 cont += 1
                 nodes = (node.getPassengers())
-                print("[", end = "")
+                contNodes = 0
+                result.write("[ ")
                 for n in nodes:
-                    print(n.getID(), end = ",")
-                print("]")
-        print("Number of cars: " + str(cont))
+                    contNodes += 1
+                    if contNodes < len(nodes):
+                        result.write(str(n.getID()) + ", ")
+                    else:
+                        result.write(str(n.getID()))
+                result.write(" ]\n")
+        result.write("Number of cars: " + str(cont))
 
     def getDistanceFromToSorted(self, graph, node1):
+
         sortedArray = []
         for i in range(len(graph)):
             if i != int(node1.getID() - 1):

@@ -16,14 +16,17 @@ class Graph:
     __distanceLongi = 111111
     __distanceLat = 111000
     __p = 1
+    __cars = 0
     __mode = 0
     __nodesArray = []
+
     """
     * This method reads the file and generateS the graph
     * @param fileName name of the file with vertices and edges
     """
     def readGraph(self, filename, numberOfCars):
-        #try:
+        self.__cars = numberOfCars
+        try:
             file = open(filename, "r", encoding='utf-8')
             strP = file.readline().split(" ")[1]
             try:
@@ -66,8 +69,8 @@ class Graph:
             for node in self.__nodesArray:
                 arc = Arc(0, 0, 0, node, node)
                 self.__matrix[int(node.getID()) - 1][int(node.getID()) - 1] = arc
-        #except:
-            #print("error gonorrea")
+        except:
+            print("An error occurred while reading the file")
 
     def getAngle(self, node1, node2):
         try:
@@ -91,6 +94,9 @@ class Graph:
 
     def getP(self):
         return self.__p
+
+    def getCars(self):
+        return self.__cars
 
     def getMode(self):
         return self.__mode
