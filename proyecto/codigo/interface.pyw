@@ -9,18 +9,18 @@ root.title("Carpooling Pick-Up")
 root.resizable(False, False)
 root.iconbitmap("./interfaceImages/icon.ico")
 root.geometry("650x550")
+
+menuBar = Menu(root)
+root.config(menu=menuBar)
 root.config(bg="#31CABF")
 root.config(relief="groove")
 root.config(bd=15)
-
-"""menuBar = Menu(root)
-root.config(menu=menuBar)
 
 helpOption = Menu(menuBar, tearoff=0)
 helpOption.add_command(label="About Carpooling")
 helpOption.add_command(label="Maps info")
 
-menuBar.add_cascade(label="Help", menu=helpOption)"""
+menuBar.add_cascade(label="Help", menu=helpOption)
 
 frame = Frame()
 frame.pack(fill="both", expand="True")
@@ -62,13 +62,13 @@ def runAFile():
     ButtonRunFile.place(x=300, y=250)
     Label(frame2, text="Or...", fg="white", bg="#1DA79E", font=("Times New Roman", 18)).place(x=30, y=320)
     ButtonOpenFile = Button(frame2, text="Open file", bd=10, bg="white", fg="#1DA79E", font=("Times New Roman", 15), command=lambda:openFile(type1.get(), type2.get(), type3.get()))
-    ButtonOpenFile.place(x=140, y=360)
+    ButtonOpenFile.place(x=140, y=350)
     Label(frame2, text="Select a map type: ", fg="white", bg="#1DA79E", font=("Times New Roman", 18)).place(x=350, y=320)
     Checkbutton(frame2, text="Type 1", fg="white", bg="#1DA79E", font=("Times New Roman", 15), variable=type1, onvalue=1, offvalue=0, command=lambda:test(type1, type2, type3)).place(x=370, y=370)
     Checkbutton(frame2, text="Type 2", fg="white", bg="#1DA79E", font=("Times New Roman", 15), variable=type2, onvalue=True, offvalue=False, command=lambda:test(type1, type2, type3)).place(x=370, y=410)
     Checkbutton(frame2, text="Type 3", fg="white", bg="#1DA79E", font=("Times New Roman", 15), variable=type3, onvalue=True, offvalue=False, command=lambda:test(type1, type2, type3)).place(x=370, y=450)
     buttonExitFrame2 = Button(frame2, text="Exit", bd=10, bg="white", fg="#1DA79E", font=("Times New Roman", 15), command=lambda:exitRun())    
-    buttonExitFrame2.place(x=165, y=440)
+    buttonExitFrame2.place(x=165, y=420)
     
 
 def test(type1, type2, type3):
