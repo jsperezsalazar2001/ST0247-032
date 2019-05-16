@@ -1,27 +1,24 @@
-"""
- * This class is the node object.
- * @author Yhoan Alejandro Guzmán García
- * @author Juan Sebastián Pérez
- """
-
-
 class Node:
     """
-     * Class constructor.
-     * @param ID node identifier.
-     * @param longitude node longitude
-     * @param latitude node latitude
-     * @param name node name
+     This class is the Node object
+     :author Juan Sebastian Perez Salazar
+     :author Yhoan Alejandro Guzman Garcia
      """
 
-    def __init__(self, id, lon, lat, nam):
+    def __init__(self, id, lon, lat, description):
+        """
+        Class constructor
+        :param id: identifier of the Node
+        :param lon: longitudinal position of the Node
+        :param lat: latitudinal position of the Node
+        :param description: Node's description
+        """
         self.__ID = id
         self.__longitude = lon
         self.__latitude = lat
-        self.__name = nam
+        self.__description = description
         self.__passengers = []
         self.__pickedUp = False
-        #self.__pickedUpBy = None
 
     def getID(self):
         return self.__ID
@@ -41,25 +38,19 @@ class Node:
     def setLatitude(self, lat):
         self.__latitude = lat
 
-    def getName(self):
-        return self.__name
+    def getDescription(self):
+        return self.__description
 
-    def setName(self, nam):
-        self.__name = nam
-
-    """
-     * This method add a new neighbor(creates an edge between two nodes).
-     * @param neighbor the other node
-     * @param arc edge between nodes
-    """
+    def setDescription(self, description):
+        self.__description = description
 
     def addPassenger(self, passenger):
+        """
+        This method adds a new passenger
+        :param passenger: is a Node object that is picked up
+        :return: None
+        """
         self.__passengers.append(passenger)
-
-    """
-     * This method get the adyacent nodes of one vertex. 
-     * @return a linkedList
-    """
 
     def getPassengers(self):
         return self.__passengers
@@ -72,9 +63,3 @@ class Node:
 
     def setPickedUp(self, b):
         self.__pickedUp = b
-
-    def getPickedUpBy(self):
-        return self.__pickedUpBy
-
-    def setPickedUpBy(self, b):
-        self.__pickedUpBy = b

@@ -1,27 +1,22 @@
-
-
-"""
-This class is the arc or edge object
-@author Yhoan Alejandro Guzmán García
-@author Juan Sebastián Pérez
-"""
-
-
 class Arc:
-
-
     """
-     * Class constructor
-     * @param nodeIDFrom name of the first node
-     * @param nodeIDTo name of the second node
-     * @param distance distance between nodes
-     * @param name street name
+        This class is the arc or edge object
+        :author Yhoan Alejandro Guzmán García
+        :author Juan Sebastián Pérez
     """
-    def __init__(self, time, angle, distance, nodeFrom, nodeTo):
+
+    def __init__(self, time, distance, nodeFrom, nodeTo):
+        """
+        Class constructor
+        :param time: time between the nodes
+        :param distance: distance between the nodes in meters
+        :param nodeFrom: node object from
+        :param nodeTo: node object to
+        """
+
         self.__nodeFrom = nodeFrom
         self.__nodeTo = nodeTo
         self.__time = time
-        self.__angle = angle
         self.__distance = distance
 
     def getTime(self):
@@ -29,12 +24,6 @@ class Arc:
 
     def setTime(self, time):
         self.__time = time
-
-    def getAngle(self):
-        return self.__angle
-
-    def setAngle(self, angle):
-        self.__angle = angle
 
     def getDistance(self):
         return self.__distance
